@@ -7,6 +7,7 @@ class HomeController extends Controller
         $_SESSION['username'] = $row;
         $data['judul'] = 'Beranda | ';
         $data['user'] = $this->model('User_model')->showData($row);
+        $this->view('logic/cekLogin');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header', $data);

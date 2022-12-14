@@ -40,8 +40,15 @@ class AuthController extends Controller
         if (!empty($row)) {
             if (password_verify($_POST['password'], $row['password'])) {
                 $_SESSION["username"] = $row["username"];
+                $_SESSION["id"] = $row["id"];
+                $nama = $row['nama'];
+                $date = date('Y-m-d H:i:s');
                 $_SESSION['islogin'] = true;
-                header('location: ' . PATH . '/');
+                $_SESSION['success'] = true;
+
+                // recent login
+                $this->model('User_model')->setLogin($nama, $date);
+                header('location: ' . PATH . '/set');
             } else {
                 Flasher::setFlash('Password lu salah sob!', ' Coba inget inget', 'danger');
                 header('location: ' . PATH . '/');

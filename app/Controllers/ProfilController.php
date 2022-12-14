@@ -5,6 +5,7 @@ class ProfilController extends Controller
     {
         $data['judul'] = 'Profil | ';
         $data['user'] = $this->model('User_model')->showData($_SESSION['username']);
+        $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header', $data);
@@ -18,6 +19,7 @@ class ProfilController extends Controller
     {
         $data['judul'] = 'Edit Profil | ';
         $data['user'] = $this->model('User_model')->showData($_SESSION['username']);
+        $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header', $data);
@@ -30,6 +32,7 @@ class ProfilController extends Controller
     {
         $data['user'] = $this->model('User_model')->showData($_SESSION['username']);
         $data['judul'] = 'Ganti Password | ';
+        $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header',  $data);

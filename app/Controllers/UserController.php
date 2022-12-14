@@ -5,6 +5,7 @@ class UserController extends Controller
     {
         $data['username'] = $p;
         $data['judul'] = 'Amawan' . ' | ';
+        $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header');

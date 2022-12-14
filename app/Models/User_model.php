@@ -43,26 +43,26 @@ class User_model
         return $this->db->rowCount();
     }
 
-    // public function login($data)
-    // {
-    //     $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
+    public function setLogin($nama, $date){
+        $query = "INSERT INTO login_tb VALUES('', :nama, :tgl)";
 
-    //     // $password = md5($data["password"]);
+        $this->db->query($query);
+        $this->db->bind('nama', $nama);
+        $this->db->bind('tgl', $date);
 
-    //     $query = 'SELECT * FROM ' . $this->table . ' WHERE username=:username';
-    //     $this->db->query($query);
-    //     $this->db->bind('username', $username);
-    //     // $this->db->bind('password', $password);
-    //     $data = $this->db->single();
-    //     return $data;
-    //     // $user = $this->getInfo($username);
+        $this->db->execute();
 
-    //     // if (password_verify($password, $user["password"])) {
-    //     //     return $user;
-    //     // } else {
-    //     //     return false;
-    //     // }
-    // }
+        return $this->db->rowCount();
+    }
+
+    public function getIdPort($port){
+        $this->db->query('SELECT username FROM'. $this->table .'WHERE id=:id');
+        $this->db->bind('id', $port);
+
+        $data = $this->db->execute();
+
+        return $data;
+    }
 
     public function getInfo($data)
     {
@@ -115,8 +115,6 @@ class User_model
         $this->db->bind('username', $data);
         return $this->db->resultSet();
     }
-
-
 
     function uploadFp()
     {

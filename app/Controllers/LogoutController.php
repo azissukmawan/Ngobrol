@@ -1,23 +1,20 @@
 <?php
-class LogoutController
+class LogoutController extends Controller
 {
     public function index()
     {
-        session_destroy();
-        header('location: ' . PATH . '/');
+        $data['judul'] = 'Logout | ';
+        $data['user'] = $this->model('User_model')->showData($_SESSION['username']);
+        // $this->view('logic/akses');
+        // $this->view('logic/clearCookie');
+        $this->view('logic/akses');
+        $this->view('logic/clearCookie');
+        $this->view('templates/metaTag', $data);
+        $this->view('styles/style');
+        $this->view('templates/header', $data);
+        $this->view('logout/logout');
+        $this->view('scripts/scriptDefault');
+        $this->view('templates/penutup');
     }
 }
 ?>
-
-<!-- Logout -->
-<div class="box mt-3">
-    <meta http-equiv="refresh" content="2;url='<?= PATH; ?>'">
-    <div class="text-center">
-        Berhasil logout...
-    </div>
-</div>
-<div class="clear"></div>
-</div>
-</div>
-<div class="clear"></div>
-<div class="mt-4"></div>

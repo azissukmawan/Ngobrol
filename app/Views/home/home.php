@@ -50,6 +50,20 @@ foreach ($data['user']  as $row) {
     <div class="clear"></div>
 <?php endif; ?>
 
+<?php if (isset($_SESSION['success'])) : ?>
+    <div id='preloader'>
+        <div id='loader' class='spinner'>
+            <div id='d1'></div>
+            <div id='d2'></div>
+            <div id='d3'></div>
+            <div id='d4'></div>
+            <div id='d5'></div>
+        </div>
+    </div>
+    <meta http-equiv="refresh" content="2;url='<?= PATH; ?>'">
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
 <?php if (isset($_SESSION['islogin'])) : ?>
     <div class="box mt-3">
         <form action="" method="post" enctype="multipart/form-data">

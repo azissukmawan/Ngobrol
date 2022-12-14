@@ -5,6 +5,7 @@ class PostController extends Controller
     {
         $data['judul'] = 'Edit Postingan | ';
         $data['id'] = $id;
+        $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header');
@@ -18,6 +19,7 @@ class PostController extends Controller
     {
         $data['judul'] = 'Hapus Postingan | ';
         $data['id'] = $id;
+        $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header');
