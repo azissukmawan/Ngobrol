@@ -1,35 +1,28 @@
-<?php
-foreach ($data['user']  as $row) {
-  $username = $row['username'];
-  $nama = $row['nama'];
-  $fp =  $row['fp'];
-  $jk =  $row['jk'];
-}
-?>
 <!-- Edit Profil -->
 <div>
   <?php Flasher::flash(); ?>
 </div>
+
 <div class="box mt-3">
   <div class="title mb-4">Edit Profil</div>
   <form action="<?= PATH ?>/profil/update" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="username" value="<?= $username; ?>" />
-    <input type="hidden" name="jk" value="<?= $jk; ?>" />
-    <input type="hidden" name="fpLama" value="<?= $fp; ?>" />
+    <input type="hidden" name="username" value="<?= $data['user']['username']; ?>" />
+    <input type="hidden" name="jk" value="<?= $data['user']['jk']; ?>" />
+    <input type="hidden" name="fpLama" value="<?= $data['user']['fp']; ?>" />
     <div class="text-center mb-3">
-      <img src="<?= PATH; ?>/img/logo/<?= $fp ?>" class="pp-edit" alt="" />
+      <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp']; ?>" class="pp-edit" alt="" />
     </div>
     <div class="was-validated form-floating mb-3">
-      <input type="text" name="nama" class="form-control" id="floatingInput1" placeholder="Masukkan Nama Akun" value="<?= $nama ?>" required />
+      <input type="text" name="nama" class="form-control" id="floatingInput1" placeholder="Masukkan Nama Akun" value="<?= $data['user']['nama'] ?>" required />
       <label for="floatingInput1">Nama Akun</label>
     </div>
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingInput2" value="<?= $username; ?>" disabled />
+      <input type="text" class="form-control" id="floatingInput2" value="<?= $data['user']['username']; ?>" disabled />
       <label for="floatingInput2">Username</label>
     </div>
     <div class="was-validated form-floating mb-3">
       <select name="jk" class="form-select" required id="floatingSelect" aria-label="Jenis Kelamin">
-        <option selected disabled>Pilih Jenis Kelamin (Default : <?= $jk ?>)</option>
+        <option selected disabled>Pilih Jenis Kelamin (Default : <?= $data['user']['jk'] ?>)</option>
         <option value="Laki-laki">Laki-laki</option>
         <option value="Perempuan">Perempuan</option>
       </select>

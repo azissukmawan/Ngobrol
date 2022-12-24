@@ -5,7 +5,7 @@ class AuthController extends Controller
     {
         $jk = $_POST["jk"];
         if (!$jk || $_POST["jk"] === "") {
-            Flasher::setFlash('Invalid', ' Pilih jenis kelamin terlebih dahulu', 'danger');
+            Flasher::setFlash('Pilih jenis kelamin terlebih dahulu', 'danger');
             header('location: ' . PATH . '/');
             exit;
         }
@@ -13,22 +13,22 @@ class AuthController extends Controller
         if ($_POST['password'] == $_POST['password2']) {
             $row = $this->model('User_model')->getInfo($_POST['username']);
             if ($row['username'] == $_POST['username']) {
-                Flasher::setFlash('Username udah ada yg duluan pake sob! ', 'Coba lagi', 'danger');
+                Flasher::setFlash('Username udah ada yg duluan pake sob!', 'danger');
                 header('location: ' . PATH . '/');
                 exit;
             } else {
                 if ($this->model('User_model')->regist($_POST) > 0) {
-                    Flasher::setFlash('Mantapp sob! ', 'silahkan login, enjoyy!', 'success');
+                    Flasher::setFlash('Mantapp sob! silahkan login, enjoyy!', 'success');
                     header('location: ' . PATH . '/');
                     exit;
                 } else {
-                    Flasher::setFlash('Gagal', 'Register', 'danger');
+                    Flasher::setFlash('Gagal Register', 'danger');
                     header('location: ' . PATH . '/');
                     exit;
                 }
             }
         } else {
-            Flasher::setFlash('Gagal', 'password tidak sama.', 'danger');
+            Flasher::setFlash('Gagal, password tidak sama.', 'danger');
             header('location: ' . PATH . '/');
             exit;
         }
@@ -36,6 +36,7 @@ class AuthController extends Controller
 
     public function loginKuy()
     {
+        date_default_timezone_set("Asia/Jakarta");
         $row = $this->model('User_model')->getInfo($_POST['username']);
         if (!empty($row)) {
             if (password_verify($_POST['password'], $row['password'])) {
@@ -50,12 +51,12 @@ class AuthController extends Controller
                 $this->model('User_model')->setLogin($nama, $date);
                 header('location: ' . PATH . '/set');
             } else {
-                Flasher::setFlash('Password lu salah sob!', ' Coba inget inget', 'danger');
+                Flasher::setFlash('Password lu salah sob! Coba inget inget', 'danger');
                 header('location: ' . PATH . '/');
                 exit;
             }
         } else {
-            Flasher::setFlash('Lu belum regist sob!', ' Kuy regist!', 'danger');
+            Flasher::setFlash('Lu belum regist sob! Kuy regist!', 'danger');
             header('location: ' . PATH . '/');
             exit;
         }

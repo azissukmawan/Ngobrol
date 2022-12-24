@@ -27,8 +27,8 @@ class User_model
         // enkripsi password
         // $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO users_tb
-                    VALUES
+        $query = "INSERT INTO ". $this->table .
+                    " VALUES
                   ('', :nama, :username, :password, :jk, :fp)";
 
         $this->db->query($query);

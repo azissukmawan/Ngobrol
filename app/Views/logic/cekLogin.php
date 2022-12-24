@@ -1,5 +1,4 @@
 <?php
-// Cek cookie
 class cekLogin extends Controller{
     public function index(){
         if (isset($_COOKIE['port']) && isset($_COOKIE['key'])) {

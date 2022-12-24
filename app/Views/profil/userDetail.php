@@ -1,22 +1,20 @@
 <?php
 $jumlahPost = count($data['post']);
 ?>
+
 <!-- Profil -->
 <div class="box mt-3">
     <div class="row row-cols-1 row-cols-md-3">
         <div class="col col1">
-            <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="img-profil" alt="<?= $data['user']['nama'] ?>" />
-            <div class="mt-3">
-                <a class="btn btn-orz clickk" href="<?= PATH; ?>/profil/edit" role="button">Edit Profil</a>
-            </div>
+            <img src="<?= PATH; ?>/img/logo/<?= $data['profil']['fp']; ?>" class="img-profil" alt="<?= $data['profil']['nama']; ?>" />
         </div>
         <div class="col deskripsi-profil">
             <p class="b1">Nama Akun</p>
-            <p class="b2"><?= $data['user']['nama'] ?></p>
+            <p class="b2"><?= $data['profil']['nama']; ?></p>
             <p class="b1 mt-2">Username</p>
-            <p class="b2"><?= $data['user']['username'] ?></p>
+            <p class="b2"><?= $data['usernameDetail']; ?></p>
             <p class="b1 mt-2">Jenis Kelamin</p>
-            <p class="b2"><?= $data['user']['jk'] ?></p>
+            <p class="b2"><?= $data['profil']['jk']; ?></p>
         </div>
     </div>
 </div>
@@ -42,21 +40,6 @@ $jumlahPost = count($data['post']);
                         <span class="tglpost"><?= $post[$i]["time"]; ?></span>
                     </div>
                 </div>
-                <?php if ($post[$i]["username"] === $_SESSION["username"]) : ?>
-                    <div>
-                        <div class="dropdown dropdown-orz">
-                            <button class="btn-option dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item clickk" href="<?= PATH; ?>/post/edit/<?= $post[$i]["id"]; ?>"><span class="jejer"><i class="bx bx-edit"></i>&nbsp;Edit Post</span></a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item clickk" href="<?= PATH; ?>/post/hapus/<?= $post[$i]["id"]; ?>" onclick="return confirm('Yakin ingin menghapus data ?');"><span class="jejer"><i class="bx bx-trash"></i>&nbsp;Hapus Post</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                <?php endif; ?>
             </div>
             <?php if ($post[$i]["teks"]) : ?>
                 <div class="mt-2">

@@ -4,9 +4,7 @@ class LogoutController extends Controller
     public function index()
     {
         $data['judul'] = 'Logout | ';
-        $data['user'] = $this->model('User_model')->showData($_SESSION['username']);
-        // $this->view('logic/akses');
-        // $this->view('logic/clearCookie');
+        $data['user'] = $this->model('User_model')->getInfo($_SESSION['username']);
         $this->view('logic/akses');
         $this->view('logic/clearCookie');
         $this->view('templates/metaTag', $data);

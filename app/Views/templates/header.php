@@ -1,11 +1,4 @@
 </head>
-<?php
-  foreach($data['user']  as $row){
-    $username = $row['username'];
-    $nama = $row['nama'];
-    $fp =  $row['fp'];
-  }
-?>
 
 <body>
   <div class="wrapper mx-auto">
@@ -33,17 +26,17 @@
           <div class="btn-top">
             <div class="dropdown">
               <button class="btn-profil dropdown-toggle clickk" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
-                <img src="<?= PATH; ?>/img/logo/<?= $fp ?>" class="profilku" alt="<?= $nama; ?>" />
-                <span class="namaku"><?= $nama; ?></span>
+                <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="profilku" alt="<?= $data['user']['nama'] ?>" />
+                <span class="namaku"><?= $data['user']['nama']; ?></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-orz dropdown-menu-end text-center">
                 <li class="mt-3">
-                  <img src="<?= PATH; ?>/img/logo/<?= $fp ?>" class="dropdown-img" alt="<?= $nama ?>" />
+                  <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="dropdown-img" alt="<?= $data['user']['nama'] ?>" />
                 </li>
                 <li class="mt-3">
-                  <span class="dropdown-nama jejer justify-content-center"><?= $nama; ?></span>
+                  <span class="dropdown-nama jejer justify-content-center"><?= $data['user']['nama']; ?></span>
                 </li>
-                <li class="mb-3"><span class="dropdown-username">@<?= $username; ?></span></li>
+                <li class="mb-3"><span class="dropdown-username">@<?= $data['user']['username']; ?></span></li>
                 <li>
                   <hr class="dropdown-divider" />
                 </li>

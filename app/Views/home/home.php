@@ -1,14 +1,6 @@
-<?php
-foreach ($data['user']  as $row) {
-    $username = $row['username'];
-    $nama = $row['nama'];
-    $fp =  $row['fp'];
-}
-?>
 <div>
     <?php Flasher::flash(); ?>
 </div>
-
 <!-- Welcome -->
 <?php if (!isset($_SESSION['islogin'])) : ?>
     <div class="box text-center mt-3">
@@ -18,6 +10,34 @@ foreach ($data['user']  as $row) {
         </span>
     </div>
     <div class="clear"></div>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['successPosting'])) : ?>
+    <div id='preloader'>
+        <div id='loader' class='spinner'>
+            <div id='d1'></div>
+            <div id='d2'></div>
+            <div id='d3'></div>
+            <div id='d4'></div>
+            <div id='d5'></div>
+        </div>
+    </div>
+    <meta http-equiv="refresh" content="2;url='<?= PATH; ?>'">
+    <?php unset($_SESSION['successPosting']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['success'])) : ?>
+    <div id='preloader'>
+        <div id='loader' class='spinner'>
+            <div id='d1'></div>
+            <div id='d2'></div>
+            <div id='d3'></div>
+            <div id='d4'></div>
+            <div id='d5'></div>
+        </div>
+    </div>
+    <meta http-equiv="refresh" content="2;url='<?= PATH; ?>'">
+    <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
 
 <?php if (!isset($_SESSION['islogin'])) : ?>
@@ -50,28 +70,15 @@ foreach ($data['user']  as $row) {
     <div class="clear"></div>
 <?php endif; ?>
 
-<?php if (isset($_SESSION['success'])) : ?>
-    <div id='preloader'>
-        <div id='loader' class='spinner'>
-            <div id='d1'></div>
-            <div id='d2'></div>
-            <div id='d3'></div>
-            <div id='d4'></div>
-            <div id='d5'></div>
-        </div>
-    </div>
-    <meta http-equiv="refresh" content="2;url='<?= PATH; ?>'">
-    <?php unset($_SESSION['success']); ?>
-<?php endif; ?>
-
 <?php if (isset($_SESSION['islogin'])) : ?>
     <div class="box mt-3">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="<?= PATH ?>/post/posting" method="post" enctype="multipart/form-data">
             <div class="d-flex">
                 <div class="flex-shrink-0">
-                    <img src="<?= PATH; ?>/img/logo/<?= $fp ?>" class="pp-status" alt="<?= $nama; ?>" />
+                    <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="pp-status" alt="<?= $data['user']['nama']; ?>" />
                 </div>
                 <div class="flex-grow-1 ms-3">
+                    <input type="hidden" name="userUsername" value="<?= $data['user']['username'] ?>">
                     <div>
                         <input id="teks" type="hidden" name="teks" autofocus>
                         <trix-editor class="trix-beranda" input="teks" autofocus></trix-editor>
@@ -94,191 +101,68 @@ foreach ($data['user']  as $row) {
     </div>
     <div class="clear"></div>
 <?php endif; ?>
+
 <!-- Status -->
 <div class="postingan">
-    <div class="box module mt-4" id="">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <div>
-                    <img src="<?= PATH ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                </div>
-                <div class="ms-3">
-                    <span class="namauser"><a href="">Amawan</a><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i></span><br />
-                    <span class="tglpost">15 November 2002 13:03</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et porro earum ab nisi nemo natus sapiente facere iste eius? Delectus molestiae repellat minima odio totam, perferendis unde eveniet possimus placeat.
-        </div>
-        <div class="post-action d-flex mt-2 gap-2">
-            <button class="btn btn-post-action btn-post-like clickk"><span class="jejer"><i class='bx bxs-heart icon-left'></i>5</span></button>
-            <a class="btn btn-post-action btn-post-comment clickk" onClick="komen_modal('1');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <div class="box-comment-wrapper align-items-end float-end module">
-        <div class="box box-comment module mt-4">
+    <?php $post = $data['post']; ?>
+    <?php $users = $data['detail']; ?>
+    <?php for ($i = 0; $i < count($post); $i++) { ?>
+        <div class="box module mt-4" id="<?= $post[$i]["id"]; ?>">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div>
-                        <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
+                        <img src="<?= PATH; ?>/img/logo/<?= $users[$i][0]['fp']; ?>" class="pp-post" alt="<?= $users[$i][0]['nama']; ?>" />
                     </div>
                     <div class="ms-3">
-                        <span class="namauser"><a href="">Bot</a><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545'></i></span><br />
-                        <span class="tglpost">16 November 2022 18:00</span>
+                        <span class="namauser"><a href="<?= PATH ?>/user/<?= $post[$i]["username"]; ?>"><?= $users[$i][0]['nama']; ?></a></span><br />
+                        <span class="tglpost"><?= $post[$i]["time"]; ?></span>
                     </div>
                 </div>
+                <?php if (isset($_SESSION['username'])) : ?>
+                    <?php if ($post[$i]["username"] === $_SESSION["username"]) : ?>
+                        <div>
+                            <div class="dropdown dropdown-orz">
+                                <button class="btn-option dropdown-toggle clickk" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item clickk" href="<?= PATH; ?>/post/edit/<?= $post[$i]["id"]; ?>"><span class="jejer"><i class="bx bx-edit"></i>&nbsp;Edit Post</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item clickk" href="<?= PATH; ?>/post/hapus/<?= $post[$i]["id"]; ?>" onclick="return confirm('Yakin ingin menghapus data ?');"><span class="jejer"><i class="bx bx-trash"></i>&nbsp;Hapus Post</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
-            <div class="mt-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti illum, earum cum cumque ex natus assumenda sequi
+            <?php if ($post[$i]["teks"]) : ?>
+                <div class="mt-2">
+                    <?= $post[$i]["teks"]; ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($post[$i]["img"]) : ?>
+                <div class="mt-3 text-center">
+                    <img data-src="<?= PATH; ?>/img/post/<?= $post[$i]["img"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="img-post lazy" alt="Images" />
+                </div>
+            <?php endif; ?>
+            <div class="post-action d-flex mt-2 gap-2">
+                <?php
+                if (!isset($_SESSION['username'])) {
+                    $username = "null";
+                }
+                // $dataLike = mysqli_query($koneksi, "SELECT id FROM like_tb WHERE id_post='$postId' AND username = '$username'");
+                ?>
+                <button class="btn btn-post-action btn-post-like clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left'></i>5</span></button>
+                <button class="btn btn-post-action btn-post-comment clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
             </div>
         </div>
         <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-</div>
-<div class="postingan">
-    <div class="box module mt-4" id="">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <div>
-                    <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                </div>
-                <div class="ms-3">
-                    <span class="namauser"><a href="">Amawan</a><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i></span><br />
-                    <span class="tglpost">15 November 2002 13:03</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et porro earum ab nisi nemo natus sapiente facere iste eius? Delectus molestiae repellat minima odio totam, perferendis unde eveniet possimus placeat.
-        </div>
-        <div class="mt-3 text-center">
-            <img data-src="<?= PATH; ?>/img/logo/logo.png" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="img-post lazy" alt="Images" />
-        </div>
-        <div class="post-action d-flex mt-2 gap-2">
-            <button class="btn btn-post-action btn-post-like clickk"><span class="jejer"><i class='bx bxs-heart icon-left'></i>5</span></button>
-            <a class="btn btn-post-action btn-post-comment clickk" onClick="komen_modal('1');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <div class="box-comment-wrapper align-items-end float-end module">
-        <div class="box box-comment module mt-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                    </div>
-                    <div class="ms-3">
-                        <span class="namauser"><a href="">Bot</a><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545'></i></span><br />
-                        <span class="tglpost">16 November 2022 18:00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti illum, earum cum cumque ex natus assumenda sequi
-            </div>
-        </div>
-        <div class="box box-comment module mt-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                    </div>
-                    <div class="ms-3">
-                        <span class="namauser"><a href="">Bot 2</a><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545'></i></span><br />
-                        <span class="tglpost">17 November 2022 18:00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2">
-                MANTAP
-            </div>
-        </div>
-        <div class="box box-comment module mt-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                    </div>
-                    <div class="ms-3">
-                        <span class="namauser"><a href="">Bot 3</a><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545'></i></span><br />
-                        <span class="tglpost">18 November 2022 18:00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2">
-                GG
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-</div>
-<div class="postingan">
-    <div class="box module mt-4" id="">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <div>
-                    <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                </div>
-                <div class="ms-3">
-                    <span class="namauser"><a href="">Amawan</a><i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i></span><br />
-                    <span class="tglpost">15 November 2002 13:03</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et porro earum ab nisi nemo natus sapiente facere iste eius? Delectus molestiae repellat minima odio totam, perferendis unde eveniet possimus placeat.
-        </div>
-        <div class="post-action d-flex mt-2 gap-2">
-            <button class="btn btn-post-action btn-post-like clickk"><span class="jejer"><i class='bx bxs-heart icon-left'></i>5</span></button>
-            <a class="btn btn-post-action btn-post-comment clickk" onClick="komen_modal('1');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <div class="box-comment-wrapper align-items-end float-end module">
-        <div class="box box-comment module mt-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                    </div>
-                    <div class="ms-3">
-                        <span class="namauser"><a href="">Bot</a><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545'></i></span><br />
-                        <span class="tglpost">16 November 2022 18:00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti illum, earum cum cumque ex natus assumenda sequi
-            </div>
-        </div>
-        <div class="box box-comment module mt-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-post" alt="" />
-                    </div>
-                    <div class="ms-3">
-                        <span class="namauser"><a href="">Bot 2</a><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545'></i></span><br />
-                        <span class="tglpost">29 November 2022 13:00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2">
-                GREATT !!
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-</div>
-</div>
+    <?php } ?>
 </div>
 <div class="clear"></div>
 <div class="mt-4"></div>
+
 <!-- Modal Komen -->
 <div class="modal fade" id="modalKomen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalKomenLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

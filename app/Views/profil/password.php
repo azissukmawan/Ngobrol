@@ -1,11 +1,3 @@
-<?php
-foreach ($data['user']  as $row) {
-  $username = $row['username'];
-  $nama = $row['nama'];
-  $fp =  $row['fp'];
-  $jk =  $row['jk'];
-}
-?>
 <div>
   <?php Flasher::flash(); ?>
 </div>
@@ -13,7 +5,7 @@ foreach ($data['user']  as $row) {
 <div class="box mt-3">
   <div class="title mb-4">Ganti Password</div>
   <form action="<?= PATH ?>/profil/updatePw" method="post">
-    <input type="hidden" name="username" value="<?= $username; ?>" />
+    <input type="hidden" name="username" value="<?= $data['user']['username']; ?>" />
     <div class="form-floating mb-3">
       <input type="password" name="pwLama" class="form-control" id="floatingPassword1" placeholder="Masukkan Password Lama" required />
       <label for="floatingPassword1">Password Lama</label>
