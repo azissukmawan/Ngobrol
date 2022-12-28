@@ -26,6 +26,8 @@ $jumlahPost = count($data['post']);
 <div class="clear"></div>
 <!-- Status -->
 <div class="postingan">
+    <?php $comments = is_array($data['komen']) ? $data['komen'] : null; ?>
+    <?php $likes = $data['like']; ?>
     <?php $post = $data['post']; ?>
     <?php $users = $data['detail']; ?>
     <?php for ($i = 0; $i < count($post); $i++) { ?>
@@ -56,11 +58,45 @@ $jumlahPost = count($data['post']);
                 if (!isset($_SESSION['username'])) {
                     $username = "null";
                 }
-                // $dataLike = mysqli_query($koneksi, "SELECT id FROM like_tb WHERE id_post='$postId' AND username = '$username'");
                 ?>
-                <button class="btn btn-post-action btn-post-like clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left'></i>5</span></button>
-                <button class="btn btn-post-action btn-post-comment clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
+                <?php if (isset($_SESSION['islogin'])) : ?>
+                    <?php if ($data['dataLike'][$i] > 0) : ?>
+                        <button class="btn btn-post-action btn-post-like clickk"><span class="jejer"><i class='bx bxs-heart icon-left'></i><?= count($likes[$i]); ?></span></button>
+                    <?php else : ?>
+                        <form action="<?= PATH ?>/like/likeUser" method="POST">
+                            <input type="hidden" name="id_post" value="<?= $post[$i]["id"]; ?>">
+                            <input type="hidden" name="userName" value="<?= $post[$i]["username"]; ?>">
+                            <button type="submit" name="like" class="btn btn-post-action btn-post-like clickk"><span class="jejer"><i class='bx bx-heart icon-left'></i><?= count($likes[$i]); ?></span></button>
+                        </form>
+                    <?php endif; ?>
+                    <a class="btn btn-post-action btn-post-comment clickk" onClick="komen_modal('<?= $post[$i]["id"]; ?>');"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></a>
+                <?php else : ?>
+                    <button class="btn btn-post-action btn-post-like clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-heart icon-left'></i><?= count($likes[$i]); ?></span></button>
+                    <button class="btn btn-post-action btn-post-comment clickk" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="jejer"><i class='bx bx-message-square-dots icon-left'></i>Comment</span></button>
+                <?php endif; ?>
             </div>
+        </div>
+        <div class="clear"></div>
+        <div class="box-comment-wrapper align-items-end float-end module">
+            <?php for ($j = 0; $j < count($comments[$i]); $j++) { ?>
+                <div class="box box-comment module mt-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <img src="<?= PATH; ?>/img/logo/<?= $data['userKomen'][$i]['fp'] ?? null; ?>" class="pp-post" alt="<?= $data['userKomen'][$i]['nama'] ?? null; ?>" />
+                            </div>
+                            <div class="ms-3">
+                                <span class="namauser"><a href="<?= PATH; ?>/user/<?= $comments[$i][$j]['username'] ?? null; ?>"><?= $data['userKomen'][$i]['nama'] ?? null; ?></a></span><br />
+                                <span class="tglpost"><?= $comments[$i][$j]['time'] ?? null; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <?= $comments[$i][$j]['komen'] ?? null; ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <div class="clear"></div>
         </div>
         <div class="clear"></div>
     <?php } ?>

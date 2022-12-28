@@ -53,9 +53,16 @@ class Post_model
 
     public function deletePost($id)
     {
-        $query = "DELETE FROM " . $this->table . " WHERE id=:id";
+
+        $query = "DELETE postingan_tb, like_tb, komen_tb
+        FROM postingan_tb
+        LEFT JOIN komen_tb ON postingan_tb.id = komen_tb.id_post
+        LEFT JOIN like_tb ON postingan_tb.id = like_tb.id_post
+        WHERE postingan_tb.id = :id OR komen_tb.id_post IS NULL AND like_tb.id_post IS NULL
+        ";
+
         $this->db->query($query);
-        $this->db->bind('id', $id);
+        $this->db->bind(':id', $id);
         $this->db->execute();
 
         $this->db->rowCount();

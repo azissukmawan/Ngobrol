@@ -22,13 +22,27 @@ class UserController extends Controller
         $data['judul'] = $data['profil']["nama"] . ' | ';
         $data['post'] = $this->model('Post_model')->personalPostingan($p);
         $data['detail'] = array();
+        $data['like'] = array();
+        $data['dataLike'] = array();
+        $data['komen'] = array();
+        $data['userKomen'] = array();
         $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
         $this->view('templates/header', $data);
         foreach ($data['post'] as $key) {
             $users = $key['username'];
+            $postId = $key['id'];
+            array_push($data['dataLike'], $this->model('Like_model')->rowsLike($postId, $sesion));
+            array_push($data['like'], $this->model('Like_model')->like($postId));
             array_push($data['detail'], $this->model('User_model')->showData($users));
+            array_push($data['komen'], $this->model('Komen_model')->dataKomen($postId));
+        }
+
+        foreach ($data['komen'] as $innerArray) {
+            foreach ($innerArray as $item) {
+                array_push($data['userKomen'], $this->model('User_model')->getInfo($item['username']));
+            }
         }
         $this->view('profil/userDetail', $data);
         $this->view('modal/modalLogout');

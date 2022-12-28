@@ -6,7 +6,7 @@
       <!-- Header -->
       <header class="d-flex justify-content-between align-items-center mt-3">
         <div>
-          <a href="<?= PATH; ?>"><img src="<?= PATH ?>/img/logo/logo.png" class="logo-img" alt="ngobrol" /></a>
+          <a href="<?= PATH; ?>"><img src="https://cdn.jsdelivr.net/gh/azissukmawan/Project-Mata-kuliah-Aplikasi-Web@main/public/img/logo/logo.png" class="logo-img" alt="ngobrol" /></a>
         </div>
         <?php if (!isset($_SESSION['islogin'])) : ?>
           <div class="btn-top">
