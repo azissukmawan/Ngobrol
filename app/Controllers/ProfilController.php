@@ -14,7 +14,6 @@ class ProfilController extends Controller
         $data['like'] = array();
         $data['dataLike'] = array();
         $data['komen'] = array();
-        $data['userKomen'] = array();
         $this->view('logic/akses');
         $this->view('templates/metaTag', $data);
         $this->view('styles/style');
@@ -28,11 +27,6 @@ class ProfilController extends Controller
             array_push($data['komen'], $this->model('Komen_model')->dataKomen($postId));
         }
 
-        foreach ($data['komen'] as $innerArray) {
-            foreach ($innerArray as $item) {
-                array_push($data['userKomen'], $this->model('User_model')->getInfo($item['username']));
-            }
-        }
         $this->view('profil/profil', $data);
         $this->view('modal/modalLogout');
         $this->view('templates/footer');

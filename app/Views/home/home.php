@@ -177,10 +177,10 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="<?= PATH; ?>/img/logo/<?= $data['userKomen'][$i]['fp'] ?? null; ?>" class="pp-post" alt="<?= $data['userKomen'][$i]['nama'] ?? null; ?>" />
+                                <img src="<?= PATH; ?>/img/logo/<?= $comments[$i][$j]['fp'] ?? null; ?>" class="pp-post" alt="<?= $comments[$i][$j]['nama'] ?? null; ?>" />
                             </div>
                             <div class="ms-3">
-                                <span class="namauser"><a href="<?= PATH; ?>/user/<?= $comments[$i][$j]['username'] ?? null; ?>"><?= $data['userKomen'][$i]['nama'] ?? null; ?></a></span><br />
+                                <span class="namauser"><a href="<?= PATH; ?>/user/<?= $comments[$i][$j]['username'] ?? null; ?>"><?= $comments[$i][$j]['nama'] ?? null; ?></a></span><br />
                                 <span class="tglpost"><?= $comments[$i][$j]['time'] ?? null; ?></span>
                             </div>
                         </div>
