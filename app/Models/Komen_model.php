@@ -16,7 +16,6 @@ class Komen_model
         JOIN komen_tb ON users_tb.username = komen_tb.username
         WHERE komen_tb.id_post=:id
         ";
-        // $query = "SELECT id, username, komen, time FROM " . $this->table . " WHERE id_post=:id_post";
         $this->db->query($query);
         $this->db->bind('id', $data);
 
@@ -46,13 +45,4 @@ class Komen_model
 
         return $this->db->rowCount();
     }
-
-    // public function getInfoUser($id)
-    // {
-
-    //     $this->db->query('SELECT users_tb.* FROM postingan_tb, komen_tb, users_tb WHERE postingan_tb.id=komen_tb.id_post AND komen_tb.username = users_tb.username AND postingan_tb.id:=id ORDER BY postingan_tb.id DESC');
-    //     $this->db->bind('id', $id);
-    //     $data = $this->db->single();
-    //     return $data;
-    // }
 }
