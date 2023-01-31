@@ -30,7 +30,10 @@ https://user-images.githubusercontent.com/89589561/215840847-763e21f9-f41e-4450-
 
 
 
+
+
 ## Getting Started
+
 - Fork this repository, then clone your fork of this repository
 - Run the web server on your device like Apache which is already on XAMPP
 - Setup in the folder, with the following settings
