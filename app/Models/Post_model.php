@@ -125,11 +125,12 @@ class Post_model
         if ($client->isConfigured()) {
             $uploadedUrl = $client->putObject($objectKey, $tmpName, $contentType);
             if ($uploadedUrl) {
-                return $uploadedUrl;
+                return $uploadedUrl; // absolute URL
             }
+            error_log('[minio] post upload fallback key=' . $objectKey);
         }
 
         move_uploaded_file($tmpName, LOCALURL . '/' . $objectKey);
-        return $namaFileBaru;
+        return $objectKey; // relative path for media_url
     }
 }

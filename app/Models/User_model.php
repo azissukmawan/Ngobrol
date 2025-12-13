@@ -147,12 +147,13 @@ class User_model
         if ($client->isConfigured()) {
             $uploadedUrl = $client->putObject($objectKey, $tmpName, $contentType);
             if ($uploadedUrl) {
-                return $uploadedUrl;
+                return $uploadedUrl; // absolute URL
             }
+            error_log('[minio] profile upload fallback key=' . $objectKey);
         }
 
         // Fallback to local storage
         move_uploaded_file($tmpName, LOCALURL . '/' . $objectKey);
-        return $namaFileBaru;
+        return $objectKey; // return relative path so media_url can resolve
     }
 }
