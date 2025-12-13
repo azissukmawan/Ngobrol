@@ -5,6 +5,7 @@ class Database
     private $user = DB_USER;
     private $pass = DB_PASS;
     private $db_name = DB_NAME;
+    private $port = DB_PORT;
 
     private $dbh;
     private $stmt;
@@ -12,7 +13,7 @@ class Database
     public function __construct()
     {
         // data source name
-        $dsn = 'mysql:host=' . $this->host . ';port=' . DB_PORT . ';dbname=' . $this->db_name . ';charset=utf8mb4';
+        $dsn = 'mysql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->db_name . ';charset=utf8mb4';
 
         $option = [
             PDO::ATTR_PERSISTENT => false,
@@ -25,7 +26,7 @@ class Database
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
         } catch (PDOException $e) {
-            error_log('DB connection failed: host=' . $this->host . ' port=' . DB_PORT . ' db=' . $this->db_name . ' msg=' . $e->getMessage());
+            error_log('DB connection failed: host=' . $this->host . ' port=' . $this->port . ' db=' . $this->db_name . ' msg=' . $e->getMessage());
             http_response_code(500);
             exit('Database connection failed.');
         }
@@ -59,7 +60,12 @@ class Database
 
     public function execute()
     {
-        $this->stmt->execute();
+        try {
+            $this->stmt->execute();
+        } catch (PDOException $e) {
+            error_log('DB query failed: ' . $e->getMessage() . ' SQL=' . ($this->stmt->queryString ?? ''));
+            throw $e;
+        }
     }
 
     public function resultSet()
@@ -70,6 +76,7 @@ class Database
 
     public function rowColumn()
     {
+        $this->execute();
         return $this->stmt->fetchColumn();
     }
 
