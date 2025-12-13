@@ -50,6 +50,12 @@ class MinioClient
         ]);
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        if ($response === false) {
+            error_log('[minio] curl error: ' . curl_error($ch));
+        }
+        if ($httpCode && $httpCode >= 400) {
+            error_log('[minio] upload failed code=' . $httpCode . ' key=' . $key . ' resp=' . substr((string)$response, 0, 500));
+        }
         curl_close($ch);
         fclose($fp);
 
