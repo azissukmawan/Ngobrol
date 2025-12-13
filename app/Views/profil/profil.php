@@ -5,7 +5,7 @@ $jumlahPost = count($data['post']);
 <div class="box mt-3">
     <div class="row row-cols-1 row-cols-md-3">
         <div class="col col1">
-            <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="img-profil" alt="<?= $data['user']['nama'] ?>" />
+            <img src="<?= media_url($data['user']['fp'], 'img/logo'); ?>" class="img-profil" alt="<?= $data['user']['nama'] ?>" />
             <div class="mt-3">
                 <a class="btn btn-orz clickk" href="<?= PATH; ?>/profil/edit" role="button">Edit Profil</a>
             </div>
@@ -37,7 +37,7 @@ $jumlahPost = count($data['post']);
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div>
-                        <img src="<?= PATH; ?>/img/logo/<?= $users[$i][0]['fp']; ?>" class="pp-post" alt="<?= $users[$i][0]['nama']; ?>" />
+                        <img src="<?= media_url($users[$i][0]['fp'], 'img/logo'); ?>" class="pp-post" alt="<?= $users[$i][0]['nama']; ?>" />
                     </div>
                     <div class="ms-3">
                         <span class="namauser"><?= $users[$i][0]['nama']; ?></span><br />
@@ -67,7 +67,7 @@ $jumlahPost = count($data['post']);
             <?php endif; ?>
             <?php if ($post[$i]["img"]) : ?>
                 <div class="mt-3 text-center">
-                    <img data-src="<?= PATH; ?>/img/post/<?= $post[$i]["img"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="img-post lazy" alt="Images" />
+                    <img data-src="<?= media_url($post[$i]["img"], 'img/post'); ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="img-post lazy" alt="Images" />
                 </div>
             <?php endif; ?>
             <div class="post-action d-flex mt-2 gap-2">
@@ -99,7 +99,7 @@ $jumlahPost = count($data['post']);
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="<?= PATH; ?>/img/logo/<?= $comments[$i][$j]['fp'] ?? null; ?>" class="pp-post" alt="<?= $comments[$i][$j]['nama'] ?? null; ?>" />
+                                <img src="<?= media_url($comments[$i][$j]['fp'] ?? null, 'img/logo'); ?>" class="pp-post" alt="<?= $comments[$i][$j]['nama'] ?? null; ?>" />
                             </div>
                             <div class="ms-3">
                                 <span class="namauser"><a href="<?= PATH; ?>/user/<?= $comments[$i][$j]['username'] ?? null; ?>"><?= $comments[$i][$j]['nama'] ?? null; ?></a></span><br />

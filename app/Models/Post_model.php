@@ -18,7 +18,7 @@ class Post_model
             $img = $this->uploadImg();
         }
 
-        $query = "INSERT INTO " . $this->table . " VALUES('', :username, :teks, :img, :time)";
+        $query = "INSERT INTO " . $this->table . " (username, teks, img, time) VALUES(:username, :teks, :img, :time)";
         $this->db->query($query);
         $this->db->bind('username', $usernameUser);
         $this->db->bind('teks', $teks);
@@ -117,11 +117,19 @@ class Post_model
 
         // lolos pengecekan, gambar siap diupload
         // generate nama gambar baru
-        $namaFileBaru = 'img-';
-        $namaFileBaru .= uniqid();
-        $namaFileBaru .= '.';
-        $namaFileBaru .= $ekstensiGambar;
-        move_uploaded_file($tmpName, LOCALURL . '/img/post/' . $namaFileBaru);
+        $namaFileBaru = 'img-' . uniqid() . '.' . $ekstensiGambar;
+        $objectKey = 'img/post/' . $namaFileBaru;
+
+        $client = new MinioClient();
+        $contentType = mime_content_type($tmpName) ?: 'application/octet-stream';
+        if ($client->isConfigured()) {
+            $uploadedUrl = $client->putObject($objectKey, $tmpName, $contentType);
+            if ($uploadedUrl) {
+                return $uploadedUrl;
+            }
+        }
+
+        move_uploaded_file($tmpName, LOCALURL . '/' . $objectKey);
         return $namaFileBaru;
     }
 }
