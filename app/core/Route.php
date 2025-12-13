@@ -11,7 +11,8 @@ class Route
             // fungsi lain rtrim menerima 2 parameter ('/', $_GET['url'])
             $url = explode('/', filter_var(trim($_GET['url']), FILTER_SANITIZE_URL)) ?? null;
         }
-        $url[0] =  isset($url[0]) ? $url[0] . 'Controller' : 0;
+        // Gunakan kapitalisasi agar cocok dengan nama file Controller di Linux
+        $url[0] = isset($url[0]) ? ucwords($url[0]) . 'Controller' : 0;
 
 
         // ngecek file controller
