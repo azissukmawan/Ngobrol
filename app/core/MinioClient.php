@@ -89,7 +89,7 @@ class MinioClient
         $canonicalUri = '/' . $this->bucket . '/' . str_replace('%2F', '/', rawurlencode($key));
         $query = [
             'X-Amz-Algorithm' => $algorithm,
-            'X-Amz-Credential' => rawurlencode($this->accessKey . '/' . $credentialScope),
+            'X-Amz-Credential' => $this->accessKey . '/' . $credentialScope,
             'X-Amz-Date' => $amzDate,
             'X-Amz-Expires' => $expires,
             'X-Amz-SignedHeaders' => 'host',
@@ -120,6 +120,8 @@ class MinioClient
         $signingKey = $this->getSigningKey($dateScope, $service);
         $signature = hash_hmac('sha256', $stringToSign, $signingKey);
 
+        // Build final query without double-encoding credential
+        $query['X-Amz-Credential'] = rawurlencode($this->accessKey . '/' . $credentialScope);
         $query['X-Amz-Signature'] = $signature;
         $finalQuery = http_build_query($query, '', '&', PHP_QUERY_RFC3986);
 
