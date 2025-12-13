@@ -75,7 +75,7 @@
         <form action="<?= PATH ?>/post/posting" method="post" enctype="multipart/form-data">
             <div class="d-flex">
                 <div class="flex-shrink-0">
-                    <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="pp-status" alt="<?= $data['user']['nama']; ?>" />
+                    <img src="<?= media_url($data['user']['fp'], 'img/logo'); ?>" class="pp-status" alt="<?= $data['user']['nama']; ?>" />
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <input type="hidden" name="userUsername" value="<?= $data['user']['username'] ?>">
@@ -113,7 +113,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div>
-                        <img src="<?= PATH; ?>/img/logo/<?= $users[$i]['fp']; ?>" class="pp-post" alt="<?= $users[$i]['nama']; ?>" />
+                        <img src="<?= media_url($users[$i]['fp'], 'img/logo'); ?>" class="pp-post" alt="<?= $users[$i]['nama']; ?>" />
                     </div>
                     <div class="ms-3">
                         <span class="namauser"><a href="<?= PATH ?>/user/<?= $post[$i]["username"]; ?>"><?= $users[$i]['nama']; ?></a></span><br />
@@ -177,7 +177,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="<?= PATH; ?>/img/logo/<?= $comments[$i][$j]['fp'] ?? null; ?>" class="pp-post" alt="<?= $comments[$i][$j]['nama'] ?? null; ?>" />
+                                <img src="<?= media_url($comments[$i][$j]['fp'] ?? null, 'img/logo'); ?>" class="pp-post" alt="<?= $comments[$i][$j]['nama'] ?? null; ?>" />
                             </div>
                             <div class="ms-3">
                                 <span class="namauser"><a href="<?= PATH; ?>/user/<?= $comments[$i][$j]['username'] ?? null; ?>"><?= $comments[$i][$j]['nama'] ?? null; ?></a></span><br />
