@@ -12,17 +12,22 @@ class Database
     public function __construct()
     {
         // data source name
-        $dsn = 'mysql:host=' . $this->host . ';port=' . DB_PORT . ';dbname=' . $this->db_name;
+        $dsn = 'mysql:host=' . $this->host . ';port=' . DB_PORT . ';dbname=' . $this->db_name . ';charset=utf8mb4';
 
         $option = [
-            PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_PERSISTENT => false,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_TIMEOUT => 5,
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
         ];
 
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
         } catch (PDOException $e) {
-            die($e->getMessage());
+            error_log('DB connection failed: host=' . $this->host . ' port=' . DB_PORT . ' db=' . $this->db_name . ' msg=' . $e->getMessage());
+            http_response_code(500);
+            exit('Database connection failed.');
         }
     }
 
