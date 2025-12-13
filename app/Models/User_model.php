@@ -55,12 +55,10 @@ class User_model
     }
 
     public function getIdPort($port){
-        $this->db->query('SELECT username FROM'. $this->table .'WHERE id=:id');
+        $this->db->query('SELECT username FROM ' . $this->table . ' WHERE id=:id');
         $this->db->bind('id', $port);
 
-        $data = $this->db->execute();
-
-        return $data;
+        return $this->db->single();
     }
 
     public function getInfo($data)

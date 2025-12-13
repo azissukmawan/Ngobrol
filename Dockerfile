@@ -8,7 +8,9 @@ RUN docker-php-ext-install pdo pdo_mysql
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/000-default.conf \
     && sed -ri "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
+    && a2enconf servername
 
 WORKDIR /var/www/html
 COPY . /var/www/html
