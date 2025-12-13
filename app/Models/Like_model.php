@@ -11,15 +11,11 @@ class Like_model
 
     public function rowsLike($id_post, $usernameUser)
     {
-        $query = "SELECT SQL_CALC_FOUND_ROWS id FROM " . $this->table . " WHERE id_post=:id_post AND username=:username";
+        $query = "SELECT COUNT(*) FROM " . $this->table . " WHERE id_post=:id_post AND username=:username";
         $this->db->query($query);
         $this->db->bind('id_post', $id_post);
         $this->db->bind('username', $usernameUser);
-        $this->db->execute();
-        $this->db->query("SELECT FOUND_ROWS()");
-        $this->db->execute();
-
-        return $this->db->rowColumn();
+        return (int) $this->db->rowColumn();
     }
 
     public function deletePost($id)
@@ -45,7 +41,7 @@ class Like_model
         if ($this->rowsLike($id_post, $usernameUser) > 0) {
             return false;
         } else {
-            $query1 = "INSERT INTO " . $this->table . " VALUES('', :id_post, :username)";
+            $query1 = "INSERT INTO " . $this->table . " (id_post, username) VALUES(:id_post, :username)";
             $this->db->query($query1);
             $this->db->bind('id_post', $id_post);
             $this->db->bind('username', $usernameUser);

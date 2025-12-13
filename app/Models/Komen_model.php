@@ -34,7 +34,7 @@ class Komen_model
     public function ngomen($id_post, $user, $komen, $timePosting)
     {
 
-        $query = "INSERT INTO " . $this->table .  " VALUES('', :id_post, :username, :komen, :time)";
+        $query = "INSERT INTO " . $this->table .  " (id_post, username, komen, time) VALUES(:id_post, :username, :komen, :time)";
         $this->db->query($query);
         $this->db->bind('id_post', $id_post);
         $this->db->bind('username', $user);
