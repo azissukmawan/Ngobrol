@@ -43,7 +43,7 @@ class User_model
     }
 
     public function setLogin($nama, $date){
-        $query = "INSERT INTO login_tb VALUES('', :nama, :tgl)";
+        $query = "INSERT INTO login_tb (nama, tgl) VALUES(:nama, :tgl)";
 
         $this->db->query($query);
         $this->db->bind('nama', $nama);
