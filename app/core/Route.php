@@ -12,7 +12,7 @@ class Route
             $url = explode('/', filter_var(trim($_GET['url']), FILTER_SANITIZE_URL)) ?? null;
         }
         // Gunakan kapitalisasi agar cocok dengan nama file Controller di Linux
-        $url[0] = isset($url[0]) ? ucwords($url[0]) . 'Controller' : 0;
+        $url[0] = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : 0;
 
 
         // ngecek file controller

@@ -12,8 +12,8 @@ class User_model
     public function regist($data)
     {
         // filter data yang diinputkan
-        $name = filter_input(INPUT_POST, "nama", FILTER_SANITIZE_STRING);
-        $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
+        $name = filter_input(INPUT_POST, "nama", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         // enkripsi password
         $password = password_hash($data['password'], PASSWORD_DEFAULT);
 

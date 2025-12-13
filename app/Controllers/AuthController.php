@@ -3,7 +3,7 @@ class AuthController extends Controller
 {
     public function register()
     {
-        $jk = $_POST["jk"];
+        $jk = $_POST["jk"] ?? null;
         if (!$jk || $_POST["jk"] === "") {
             Flasher::setFlash('Pilih jenis kelamin terlebih dahulu', 'danger');
             header('location: ' . PATH . '/');
@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         try {
             $rc = $this->model('User_model')->regist($_POST);
-            error_log('[auth] register username=' . $_POST['username'] . ' rc=' . $rc);
+            error_log('[auth] register username=' . ($_POST['username'] ?? '-') . ' rc=' . $rc);
             if ($rc > 0) {
                 Flasher::setFlash('Mantapp sob! silahkan login, enjoyy!', 'success');
             } else {
