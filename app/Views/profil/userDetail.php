@@ -114,7 +114,7 @@ $jumlahPost = count($data['post']);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="<?= PATH; ?>/komen" method="post">
                         <input type="hidden" name="idpost" id="ambil_id" value="#">
                         <div>
                             <input id="komen" type="hidden" name="komen">
