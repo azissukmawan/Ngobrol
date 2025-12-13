@@ -25,6 +25,7 @@ class Database
 
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
+            $this->dbh->exec("SET time_zone = '+00:00'");
         } catch (PDOException $e) {
             error_log('DB connection failed: host=' . $this->host . ' port=' . $this->port . ' db=' . $this->db_name . ' msg=' . $e->getMessage());
             http_response_code(500);
