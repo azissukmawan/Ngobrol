@@ -8,10 +8,23 @@ require_once 'config/config.php';
 if (!function_exists('media_url')) {
     function media_url($value, $folder)
     {
-        if (!$value) {
+        $value = trim((string)$value);
+        $folder = trim($folder, '/');
+
+        if ($value === '') {
             return PATH . '/' . $folder . '/';
         }
-        $isAbsolute = preg_match('/^https?:\/\//i', $value) === 1;
-        return $isAbsolute ? $value : PATH . '/' . trim($folder, '/') . '/' . ltrim($value, '/');
+
+        // Absolute URLs
+        if (preg_match('/^https?:\/\//i', $value)) {
+            return $value;
+        }
+
+        // If value already starts with folder, don't duplicate folder
+        if ($folder !== '' && strpos($value, $folder . '/') === 0) {
+            return PATH . '/' . $value;
+        }
+
+        return PATH . '/' . ($folder !== '' ? $folder . '/' : '') . ltrim($value, '/');
     }
 }
