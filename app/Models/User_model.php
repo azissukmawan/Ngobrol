@@ -27,9 +27,8 @@ class User_model
         // enkripsi password
         // $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO ". $this->table .
-                    " VALUES
-                  ('', :nama, :username, :password, :jk, :fp)";
+                $query = "INSERT INTO " . $this->table . " (nama, username, password, jk, fp)
+                                    VALUES (:nama, :username, :password, :jk, :fp)";
 
         $this->db->query($query);
         $this->db->bind('nama', $name);
@@ -141,11 +140,21 @@ class User_model
         }
         // lolos pengecekan, gambar siap diupload
         // generate nama gambar baru
-        $namaFileBaru = 'profil-';
-        $namaFileBaru .= uniqid();
-        $namaFileBaru .= '.';
-        $namaFileBaru .= $ekstensiGambar;
-        move_uploaded_file($tmpName, LOCALURL . '/img/logo/' . $namaFileBaru);
+        $namaFileBaru = 'profil-' . uniqid() . '.' . $ekstensiGambar;
+        $objectKey = 'img/logo/' . $namaFileBaru;
+
+        // Try upload to MinIO
+        $client = new MinioClient();
+        $contentType = mime_content_type($tmpName) ?: 'application/octet-stream';
+        if ($client->isConfigured()) {
+            $uploadedUrl = $client->putObject($objectKey, $tmpName, $contentType);
+            if ($uploadedUrl) {
+                return $uploadedUrl;
+            }
+        }
+
+        // Fallback to local storage
+        move_uploaded_file($tmpName, LOCALURL . '/' . $objectKey);
         return $namaFileBaru;
     }
 }

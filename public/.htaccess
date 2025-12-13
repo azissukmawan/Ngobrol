@@ -3,6 +3,10 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# Block sensitive files
+RewriteRule "(^|/)\.((env|git|gitignore|htaccess|htpasswd)(\.bak)?)" - [F,L]
+RewriteRule "(^|/)(composer\.lock|composer\.json)" - [F,L]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 

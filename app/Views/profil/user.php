@@ -2,7 +2,7 @@
         <div class="box mt-3">
             <div class="row row-cols-1 row-cols-md-3">
                 <div class="col col1">
-                    <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="img-profil" alt="" />
+                    <img src="<?= media_url('bahan.jpg', 'img/logo'); ?>" class="img-profil" alt="" />
                 </div>
                 <div class="col deskripsi-profil">
                     <p class="b1">Nama Akun</p>
@@ -24,7 +24,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div>
-                        <img data-src="<?= PATH; ?>/img/logo/bahan.jpg" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="" />
+                        <img data-src="<?= media_url('bahan.jpg', 'img/logo'); ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="" />
                     </div>
                     <div class="ms-3">
                         <span class="namauser">Amawan<i class="bx bxs-badge-check icon-right" style="color: #3897f0"></i></span><br />
@@ -50,7 +50,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <div>
-                            <img data-src="<?= PATH; ?>/img/logo/bahan.jpg" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="" />
+                            <img data-src="<?= media_url('bahan.jpg', 'img/logo'); ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="pp-post lazy" alt="" />
                         </div>
                         <div class="ms-3">
                             <span class="namauser"><a href="">Bot</a><i class='bx bxs-bot bx-tada icon-right' style='color:#dc3545'></i></span><br />

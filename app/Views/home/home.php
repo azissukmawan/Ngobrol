@@ -45,7 +45,7 @@
     <div class="box box-update mt-4">
         <div class="d-flex">
             <div class="flex-shrink-0">
-                <img src="<?= PATH; ?>/img/logo/bahan.jpg" class="pp-status" alt="null" />
+                <img src="<?= media_url('bahan.jpg', 'img/logo'); ?>" class="pp-status" alt="null" />
             </div>
             <div class="flex-grow-1 ms-3">
                 <div>
@@ -145,7 +145,7 @@
             <?php endif; ?>
             <?php if ($post[$i]["img"]) : ?>
                 <div class="mt-3 text-center">
-                    <img data-src="<?= PATH; ?>/img/post/<?= $post[$i]["img"]; ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="img-post lazy" alt="Images" />
+                    <img data-src="<?= media_url($post[$i]["img"], 'img/post'); ?>" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="img-post lazy" alt="Images" />
                 </div>
             <?php endif; ?>
             <div class="post-action d-flex mt-2 gap-2">

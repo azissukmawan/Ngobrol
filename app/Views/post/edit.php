@@ -35,7 +35,7 @@
             <div class="d-flex align-items-center">
                 <div class="d-flex align-items-center">
                     <div>
-                        <img src="<?= PATH; ?>/img/logo/<?= $data['detail']['fp']; ?>" class="pp-post" alt="<?= $data['detail']['nama']; ?>" />
+                        <img src="<?= media_url($data['detail']['fp'], 'img/logo'); ?>" class="pp-post" alt="<?= $data['detail']['nama']; ?>" />
                     </div>
                     <div class="ms-3">
                         <span class="namauser"><?= $data['detail']['nama']; ?></span><br />
@@ -49,7 +49,7 @@
             </div>
             <?php if ($data['post']["img"]) : ?>
                 <div class="mt-3 text-center">
-                    <img src="<?= PATH; ?>/img/post/<?= $data['post']["img"]; ?>" class="img-post" alt="Images" />
+                    <img src="<?= media_url($data['post']["img"], 'img/post'); ?>" class="img-post" alt="Images" />
                 </div>
             <?php endif; ?>
             <div class="mt-2">

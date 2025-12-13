@@ -26,12 +26,12 @@
           <div class="btn-top">
             <div class="dropdown">
               <button class="btn-profil dropdown-toggle clickk" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
-                <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="profilku" alt="<?= $data['user']['nama'] ?>" />
+                <img src="<?= media_url($data['user']['fp'], 'img/logo'); ?>" class="profilku" alt="<?= $data['user']['nama'] ?>" />
                 <span class="namaku"><?= $data['user']['nama']; ?></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-orz dropdown-menu-end text-center">
                 <li class="mt-3">
-                  <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp'] ?>" class="dropdown-img" alt="<?= $data['user']['nama'] ?>" />
+                  <img src="<?= media_url($data['user']['fp'], 'img/logo'); ?>" class="dropdown-img" alt="<?= $data['user']['nama'] ?>" />
                 </li>
                 <li class="mt-3">
                   <span class="dropdown-nama jejer justify-content-center"><?= $data['user']['nama']; ?></span>

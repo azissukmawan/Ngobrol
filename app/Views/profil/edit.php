@@ -10,7 +10,7 @@
     <input type="hidden" name="jk" value="<?= $data['user']['jk']; ?>" />
     <input type="hidden" name="fpLama" value="<?= $data['user']['fp']; ?>" />
     <div class="text-center mb-3">
-      <img src="<?= PATH; ?>/img/logo/<?= $data['user']['fp']; ?>" class="pp-edit" alt="" />
+      <img src="<?= media_url($data['user']['fp'], 'img/logo'); ?>" class="pp-edit" alt="" />
     </div>
     <div class="was-validated form-floating mb-3">
       <input type="text" name="nama" class="form-control" id="floatingInput1" placeholder="Masukkan Nama Akun" value="<?= $data['user']['nama'] ?>" required />
