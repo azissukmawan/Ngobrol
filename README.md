@@ -29,10 +29,14 @@ the MVC pattern that is being studied in a web application course, therefore my 
 
 
 
-https://user-images.githubusercontent.com/89589561/215840847-763e21f9-f41e-4450-b852-a209735df4e8.mp4
 
 
-this website https://ngobrol-2929ab79bbe7.herokuapp.com/
+https://github.com/user-attachments/assets/256ba7dc-a9fe-4cdb-9e46-0169e77c8457
+
+
+
+
+this website https://amawan.dev/
 
 
 
