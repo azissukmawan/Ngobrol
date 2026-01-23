@@ -1,7 +1,5 @@
 # NGOBROL
 
-This is a project at the end of semester 4 of the assignment collage for the web application course (Group).
-
 ![Ngobrol](https://cdn.jsdelivr.net/gh/azissukmawan/Project-Mata-kuliah-Aplikasi-Web@main/public/img/logo/logo.png) 
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/azissukmawan/Project-Mata-kuliah-Aplikasi-Web)
@@ -36,7 +34,7 @@ https://github.com/user-attachments/assets/256ba7dc-a9fe-4cdb-9e46-0169e77c8457
 
 
 
-this website https://amawan.dev/
+this website https://ngobrol.amawan.app/
 
 
 
